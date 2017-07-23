@@ -23,3 +23,19 @@ ln -s ~/dotfiles/vimrc .vimrc
 brew install macvim --override-system-vim
 ```
 
+## Tool: Pathogen
+
+```
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
+
+## Plugin: Lightline
+
+```
+git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
+```
+
+
+
+
