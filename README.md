@@ -43,4 +43,10 @@ git clone https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim
 git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 ```
 
+## Other Tools
+
+```
+brew install htop
+brew install ncdu
+```
 
