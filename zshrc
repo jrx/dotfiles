@@ -86,6 +86,24 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# DC/OS cli
+dcs() {
+  if [ -z "$1" ]; then
+    echo "Missing URL argument"
+    return
+  fi
+  CLUSTERS=$(dcos cluster list | awk '{print $1}' | grep -v NAME | sed 's/*//g')
+  if [ -n "$CLUSTERS" ]; then
+    echo Wiping clusters: $CLUSTERS
+    echo $CLUSTERS | xargs -n 1 dcos cluster remove
+  fi
+  dcos cluster setup $1 --no-check --username=admin --password=admin
+  echo $1/mesos 
+}
+alias dcrm="for i in \$(dcos cluster list | tail -n +2 | awk {'print \$1'}); do echo \$i | sed 's/*//g' | xargs dcos cluster remove ; done"
+alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do dcos task log --line=10000 \$i > \$i-stdout.log; dcos task log --line=10000 \$i stderr > \$i-stderr.log; done"
+
+
 # Autovervollstaendigung
 fpath=(/usr/local/share/zsh-completions $fpath)
 
