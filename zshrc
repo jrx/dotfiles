@@ -100,7 +100,7 @@ dcs() {
   dcos cluster setup $1 --no-check --username=admin --password=admin
   echo $1/mesos 
 }
-alias dcrm="for i in \$(dcos cluster list | tail -n +2 | awk {'print \$1'}); do echo \$i | sed 's/*//g' | xargs dcos cluster remove ; done"
+alias dcrm="dcos cluster remove --all"
 alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do dcos task log --line=10000 \$i > \$i-stdout.log; dcos task log --line=10000 \$i stderr > \$i-stderr.log; done"
 
 
@@ -110,3 +110,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin/
+
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
