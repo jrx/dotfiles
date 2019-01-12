@@ -23,3 +23,6 @@ set listchars=tab:»\ ,eol:¬
 "ino <left> <Nop>
 "ino <right> <Nop>
 "ino <up> <Nop>
+
+set paste
+set clipboard=unnamed
