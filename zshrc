@@ -87,6 +87,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # DC/OS cli
+autoload -Uz bashcompinit && bashcompinit
+eval "$(dcos completion zsh)"
+
 dcs() {
   if [ -z "$1" ]; then
     echo "Missing URL argument"
@@ -100,11 +103,11 @@ dcs() {
   dcos cluster setup $1 --no-check --username=admin --password=admin
   echo $1/mesos 
 }
+
 alias dcrm="dcos cluster remove --all"
 alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do dcos task log --line=10000 \$i > \$i-stdout.log; dcos task log --line=10000 \$i stderr > \$i-stderr.log; done"
 
-
-# Autovervollstaendigung
+# auto completion
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Golang
