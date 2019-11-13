@@ -100,7 +100,7 @@ dcs() {
     echo Wiping clusters: $CLUSTERS
     echo $CLUSTERS | xargs -n 1 dcos cluster remove
   fi
-  dcos cluster setup $1 --no-check --username=admin --password=admin
+  dcos cluster setup $1 --no-check --insecure --username=admin --password=admin
   echo $1/mesos 
 }
 
