@@ -50,7 +50,7 @@ ZSH_THEME="sammy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew history kubectl)
+plugins=(git brew history kubectl docker vagrant)
 
 # User configuration
 
@@ -110,6 +110,9 @@ alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do 
 # auto completion
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+# Ruby
+eval "$(rbenv init -)"
+
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin/
@@ -117,3 +120,48 @@ export PATH=$PATH:$HOME/go/bin/
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# Vault
+export PATH="/Users/jan/test/vault/bin:$PATH"
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/jan/test/vault/bin/vault vault
+
+# Consul
+export PATH="/Users/jan/test/consul/bin:$PATH"
+complete -o nospace -C /Users/jan/test/consul/bin/consul consul
+
+# Nomad
+export PATH="/Users/jan/test/nomad/bin:$PATH"
+complete -o nospace -C /Users/jan/test/nomad/bin/nomad nomad
+
+# GCP
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+# CSA Report Document
+csa() {
+  # Check Docker
+  if (! docker stats --no-stream &> /dev/null); then
+    # On Mac OS this would be the terminal command to launch Docker
+    open -a Docker
+    # Wait until Docker daemon is running and has completed initialisation
+    echo "Waiting for Docker to launch..."
+    while (! docker stats --no-stream &> /dev/null); do
+      # Docker takes a few seconds to initialize
+      sleep 1
+    done
+  fi
+
+  # Delete .md from the target file and call the script
+  target=$(echo ${1} | sed 's/.md$//')
+  ../../build.sh ${target}
+  open ${target}.pdf
+}
+
+# Doormat
+dm () {
+  doormat login -f && doormat aws tf-push --account support_eng1_dev  --local
+}
+
+# Kubernetes
+
+alias kn='kubectl config set-context --current --namespace '
