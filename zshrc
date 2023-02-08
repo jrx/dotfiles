@@ -137,6 +137,12 @@ complete -o nospace -C /Users/jan/test/nomad/bin/nomad nomad
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
+# Hero
+alias hero='docker run -it --rm -v ${PWD}:/output hero -I "Jan Repnak"'
+
+# auxin
+export PATH=$PATH:~/csa/internal-csa-docs-hero
+
 # CSA Report Document
 csa() {
   # Check Docker
@@ -159,7 +165,7 @@ csa() {
 
 # Doormat
 dm () {
-  doormat login -f && doormat aws tf-push --account support_eng1_dev  --local
+  doormat login -f && doormat aws tf-push --account csa_emea_dev  --local
 }
 
 # Kubernetes
