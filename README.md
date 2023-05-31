@@ -53,6 +53,6 @@ brew install ncdu
 ## Fonts
 
 ```bash
-brew tap caskroom/fonts
-brew cask install font-fira-code
+brew tap homebrew/cask-fontss
+brew install font-fira-code
 ```

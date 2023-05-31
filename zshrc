@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jan/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -87,31 +87,31 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # DC/OS cli
-autoload -Uz bashcompinit && bashcompinit
-eval "$(dcos completion zsh)"
+# autoload -Uz bashcompinit && bashcompinit
+# eval "$(dcos completion zsh)"
 
-dcs() {
-  if [ -z "$1" ]; then
-    echo "Missing URL argument"
-    return
-  fi
-  CLUSTERS=$(dcos cluster list | awk '{print $1}' | grep -v NAME | sed 's/*//g')
-  if [ -n "$CLUSTERS" ]; then
-    echo Wiping clusters: $CLUSTERS
-    echo $CLUSTERS | xargs -n 1 dcos cluster remove
-  fi
-  dcos cluster setup $1 --no-check --insecure --username=admin --password=admin
-  echo $1/mesos 
-}
+# dcs() {
+#   if [ -z "$1" ]; then
+#     echo "Missing URL argument"
+#     return
+#   fi
+#   CLUSTERS=$(dcos cluster list | awk '{print $1}' | grep -v NAME | sed 's/*//g')
+#   if [ -n "$CLUSTERS" ]; then
+#     echo Wiping clusters: $CLUSTERS
+#     echo $CLUSTERS | xargs -n 1 dcos cluster remove
+#   fi
+#   dcos cluster setup $1 --no-check --insecure --username=admin --password=admßin
+#   echo $1/mesos 
+# }
 
-alias dcrm="dcos cluster remove --all"
-alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do dcos task log --line=10000 \$i > \$i-stdout.log; dcos task log --line=10000 \$i stderr > \$i-stderr.log; done"
+# alias dcrm="dcos cluster remove --all"
+# alias dclog="for i in \$(dcos task --json | jq --raw-output '.[] | .name') ; do dcos task log --line=10000 \$i > \$i-stdout.log; dcos task log --line=10000 \$i stderr > \$i-stderr.log; done"
 
 # auto completion
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Ruby
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # Golang
 export GOPATH=$HOME/go
@@ -121,27 +121,27 @@ export PATH=$PATH:$HOME/go/bin/
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Vault
-export PATH="/Users/jan/test/vault/bin:$PATH"
+export PATH="$HOME/test/vault/bin:$PATH"
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/jan/test/vault/bin/vault vault
+complete -o nospace -C $HOME/test/vault/bin/vault vault
 
 # Consul
-export PATH="/Users/jan/test/consul/bin:$PATH"
-complete -o nospace -C /Users/jan/test/consul/bin/consul consul
+export PATH="$HOME/test/consul/bin:$PATH"
+complete -o nospace -C $HOME/test/consul/bin/consul consul
 
 # Nomad
-export PATH="/Users/jan/test/nomad/bin:$PATH"
-complete -o nospace -C /Users/jan/test/nomad/bin/nomad nomad
+export PATH="$HOME/test/nomad/bin:$PATH"
+complete -o nospace -C $HOME/test/nomad/bin/nomad nomad
 
 # GCP
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # Hero
 alias hero='docker run -it --rm -v ${PWD}:/output hero -I "Jan Repnak"'
 
 # auxin
-export PATH=$PATH:~/csa/internal-csa-docs-hero
+export PATH=$PATH:$HOME/csa/internal-csa-docs-hero
 
 # CSA Report Document
 csa() {
