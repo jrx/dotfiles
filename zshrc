@@ -121,9 +121,14 @@ export PATH=$PATH:$HOME/go/bin/
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Vault
-export PATH="$HOME/test/vault/bin:$PATH"
+export PATH="$HOME/test/vault/bin/:$PATH"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $HOME/test/vault/bin/vault vault
+
+# Boundary
+export PATH="$HOME/test/boundary/bin:$PATH"
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C $HOME/test/boundary/bin/boundary boundary
 
 # Consul
 export PATH="$HOME/test/consul/bin:$PATH"
@@ -144,29 +149,38 @@ alias hero='docker run -it --rm -v ${PWD}:/output hero -I "Jan Repnak"'
 export PATH=$PATH:$HOME/csa/internal-csa-docs-hero
 
 # CSA Report Document
-csa() {
+pdf() {
   # Check Docker
-  if (! docker stats --no-stream &> /dev/null); then
-    # On Mac OS this would be the terminal command to launch Docker
-    open -a Docker
-    # Wait until Docker daemon is running and has completed initialisation
-    echo "Waiting for Docker to launch..."
-    while (! docker stats --no-stream &> /dev/null); do
-      # Docker takes a few seconds to initialize
+  if (! podman stats --no-stream &> /dev/null); then
+    # On Mac OS this would be the terminal command to launch podman
+    open -a 'Podman Desktop'
+    # Wait until podman daemon is running and has completed initialisation
+    echo "Waiting for podman to launch..."
+    while (! podman stats --no-stream &> /dev/null); do
+      # podman takes a few seconds to initialize
       sleep 1
     done
   fi
 
   # Delete .md from the target file and call the script
   target=$(echo ${1} | sed 's/.md$//')
-  ../../build.sh ${target}
+
+  readonly CSDIR=$HOME/csa/internal-csa-docs-customer-submissions
+  readonly DEFAULT_IMG=ghcr.io/hashicorp-sa/internal-csa-docs-customer-submissions/csa-doc-multiarch:latest
+
+  podman run --rm -v ${PWD}:/data -v ${CSDIR}/assets:/assets -e DOCNAME=${target} ${DEFAULT_IMG}
   open ${target}.pdf
 }
 
 # Doormat
 dm () {
-  doormat login -f && doormat aws tf-push --account csa_emea_dev  --local
+  doormat login -f && doormat aws tf-push --account aws_jrepnak_test --local
 }
+
+# Terraform
+alias ta='terraform apply -auto-approve'
+alias td='terraform destroy -auto-approve'
+alias to='terraform output'
 
 # Kubernetes
 alias kn='kubectl config set-context --current --namespace '
@@ -208,3 +222,5 @@ alias jwthp="decode_jwt"
 
 # Decode JWE header
 alias jweh="decode_jose 1"
+# Created by `pipx` on 2024-05-03 11:01:51
+export PATH="$PATH:/Users/jrepnak/.local/bin"
