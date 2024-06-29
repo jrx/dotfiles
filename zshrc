@@ -117,6 +117,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin/
 
+# Podman
+export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -143,7 +146,7 @@ source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh
 source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # Hero
-alias hero='docker run -it --rm -v ${PWD}:/output hero -I "Jan Repnak"'
+alias hero='podman run -it --rm -v ${PWD}:/output hero -I "Jan Repnak"'
 
 # auxin
 export PATH=$PATH:$HOME/csa/internal-csa-docs-hero
