@@ -223,4 +223,4 @@ alias jwthp="decode_jwt"
 # Decode JWE header
 alias jweh="decode_jose 1"
 # Created by `pipx` on 2024-05-03 11:01:51
-export PATH="$PATH:/Users/jrepnak/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
