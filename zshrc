@@ -141,6 +141,9 @@ complete -o nospace -C $HOME/test/consul/bin/consul consul
 export PATH="$HOME/test/nomad/bin:$PATH"
 complete -o nospace -C $HOME/test/nomad/bin/nomad nomad
 
+# Postgres (psql)
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
 # GCP
 source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
@@ -227,3 +230,10 @@ alias jwthp="decode_jwt"
 alias jweh="decode_jose 1"
 # Created by `pipx` on 2024-05-03 11:01:51
 export PATH="$PATH:$HOME/.local/bin"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+# This loads nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+# This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
