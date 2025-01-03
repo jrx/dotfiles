@@ -124,22 +124,22 @@ export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Vault
-export PATH="$HOME/test/vault/bin/:$PATH"
+export PATH="$HOME/code/vault/bin/:$PATH"
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $HOME/test/vault/bin/vault vault
+complete -o nospace -C $HOME/code/vault/bin/vault vault
 
 # Boundary
-export PATH="$HOME/test/boundary/bin:$PATH"
+export PATH="$HOME/code/boundary/bin:$PATH"
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $HOME/test/boundary/bin/boundary boundary
+complete -o nospace -C $HOME/code/boundary/bin/boundary boundary
 
 # Consul
-export PATH="$HOME/test/consul/bin:$PATH"
-complete -o nospace -C $HOME/test/consul/bin/consul consul
+export PATH="$HOME/code/consul/bin:$PATH"
+complete -o nospace -C $HOME/code/consul/bin/consul consul
 
 # Nomad
-export PATH="$HOME/test/nomad/bin:$PATH"
-complete -o nospace -C $HOME/test/nomad/bin/nomad nomad
+export PATH="$HOME/code/nomad/bin:$PATH"
+complete -o nospace -C $HOME/code/nomad/bin/nomad nomad
 
 # Postgres (psql)
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
