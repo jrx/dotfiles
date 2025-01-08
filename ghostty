@@ -1,6 +1,6 @@
 theme = nord
 font-family = FiraCode Nerd Font
-font-size = 16
+font-size = 13
 background-opacity = 0.85
 background-blur-radius = 25
 window-padding-x = 4,4
