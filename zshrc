@@ -50,7 +50,7 @@ ZSH_THEME="sammy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew history kubectl docker vagrant)
+plugins=(git brew history kubectl podman vagrant)
 
 # User configuration
 
@@ -119,6 +119,7 @@ export PATH=$PATH:$HOME/go/bin/
 
 # Podman
 export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+alias docker=podman
 
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
